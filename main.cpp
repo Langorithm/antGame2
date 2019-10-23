@@ -1,5 +1,5 @@
 #include <ncurses.h>
-#include "antGame.cpp"
+#include "antgame.h"
 
 int main(){
 
@@ -7,14 +7,20 @@ int main(){
 	initscr();
 	cbreak();
 	noecho();
-
+	nodelay(stdscr, false);
+	bool pause = false;
 	
 	//set a game in the terminal screen
-	binAntGame game(stdscr);
+	AntGame game(stdscr);
 
 	//Game loop. Stop with q
 	char input = ' ';
 	while (input != 'q'){
+
+		if (input == 'p'){
+			pause = !pause;
+			nodelay(stdscr, pause);
+		}
 		input = getch();
 		game.tick();		
 	}
