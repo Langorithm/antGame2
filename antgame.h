@@ -31,7 +31,7 @@ public:
 	
 	int height() const;
 	int width() const;
-	bool debug = false;
+
 private:
 
 	/*		Internal Structures		*/
@@ -45,7 +45,7 @@ private:
 
 	bool _antTile();
 	
-	void _forwardAnt();	
-	void _advanceAnt();
+	void _forwardAnt();	//move ant in the direction it is facing
+	void _advanceAnt();     //change tile,turn and forward the ant
 
 };
