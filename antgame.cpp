@@ -8,7 +8,7 @@ AntGame::AntGame(WINDOW* win){
 	int rows;
 	int cols;
 	getmaxyx(win, rows, cols);
-
+	
 	_win = win;
 	std::vector<bool> falseRow(cols, false);
 	_map = boolMatrix(rows, falseRow);
@@ -17,6 +17,10 @@ AntGame::AntGame(WINDOW* win){
 	_ant.facing = up;
 	_ant.xPos = cols/2;
 	_ant.yPos = rows/2;	
+	_ant.color = red;
+	//Set colors//	
+	start_color();
+	init_pair(1, red, black);
 
 }
 
@@ -69,10 +73,11 @@ void AntGame::_advanceAnt(){
 	
 	//Change direction
 	if ( _antTile()){
+		
 		mvwaddch(_win, _ant.yPos, _ant.xPos, ' ');
 		_ant.turnLeft();
 	} else {
-		mvwaddch(_win, _ant.yPos, _ant.xPos, 'x');
+		_printAnt(_ant);
 		_ant.turnRight();
 	}
 
@@ -85,7 +90,12 @@ void AntGame::_advanceAnt(){
 	
 }
 
+void AntGame::_printAnt(Ant ant){
+	attron(COLOR_PAIR(ant.color));	
+	mvwaddch(_win, _ant.yPos, _ant.xPos, 'x');
+	attroff(COLOR_PAIR(ant.color));	
 
+}
 
 
 

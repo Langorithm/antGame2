@@ -4,11 +4,12 @@
 typedef std::vector< std::vector <bool> > boolMatrix;
 
 enum Dir {up = 0, right = 1, down = 2, left = 3};
+enum Color {black = 0, red = 1, green = 2, yellow = 3, blue = 4, magenta = 5, cyan = 6, white = 7};
 
 struct Ant {
 	int xPos;
 	int yPos;
-
+	Color color;
 	Dir facing;
 	
 	void turnRight(){
@@ -47,5 +48,6 @@ private:
 	
 	void _forwardAnt();	//move ant in the direction it is facing
 	void _advanceAnt();     //change tile,turn and forward the ant
+	void _printAnt(Ant ant);
 
 };
