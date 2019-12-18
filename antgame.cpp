@@ -20,14 +20,12 @@ AntGame::AntGame(WINDOW* win){
 	_ant.color = red;
 	//Set colors//	
 	start_color();
-	init_pair(1, red, background);
+	init_pair(1, red, black);
 
 }
 
 void AntGame::tick(){
-	
-	
-	_advanceAnt(_ant);
+	_advanceAnt();
 	wrefresh(_win);
 	
 }
@@ -42,59 +40,59 @@ int AntGame::width() const{
 
 /*		Private		*/
 
-bool AntGame::_antTile(Ant ant){
-	return _map[ant.yPos][ant.xPos];
+bool AntGame::_antTile(){
+	return _map[_ant.yPos][_ant.xPos];
 }
 
-void AntGame::_forwardAnt(Ant ant){
+void AntGame::_forwardAnt(){
 
 	//advance in direction
-	switch (ant.facing){
+	switch (_ant.facing){
 	
 		case up:
-			ant.yPos++; 
+			_ant.yPos++; 
 			break;
 		case down:
-			ant.yPos--;
+			_ant.yPos--;
 			break;
 		case right:
-			ant.xPos++;
+			_ant.xPos++;
 			break;
 		case left:
-			ant.xPos--; 
+			_ant.xPos--; 
 			break;
 	}
 	
 	//Loop around
-	ant.xPos = (ant.xPos + width()) % width();
-	ant.yPos = (ant.yPos + height()) % height();
+	_ant.xPos = (_ant.xPos + width()) % width();
+	_ant.yPos = (_ant.yPos + height()) % height();
 
 }
 
-void AntGame::_advanceAnt(Ant ant){
+void AntGame::_advanceAnt(){
 	
 	//Change direction
-	if ( _antTile(ant)){
+	if ( _antTile()){
 		
-		mvwaddch(_win, ant.yPos, ant.xPos, ' ');
-		ant.turnLeft();
+		mvwaddch(_win, _ant.yPos, _ant.xPos, ' ');
+		_ant.turnLeft();
 	} else {
-		_printAnt(ant);
-		ant.turnRight();
+		_printAnt(_ant);
+		_ant.turnRight();
 	}
 
 	//Change tile color
-	_map[ant.yPos][ant.xPos] = !_antTile(ant);
+	_map[_ant.yPos][_ant.xPos] = !_antTile();
 	
 	//Move
-	_forwardAnt(ant);
+	_forwardAnt();
 
 	
 }
 
 void AntGame::_printAnt(Ant ant){
 	attron(COLOR_PAIR(ant.color));	
-	mvwaddch(_win, ant.yPos, ant.xPos, 'x');
+	mvwaddch(_win, _ant.yPos, _ant.xPos, 'x');
 	attroff(COLOR_PAIR(ant.color));	
 
 }

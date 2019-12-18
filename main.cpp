@@ -7,12 +7,8 @@ int main(){
 	initscr();
 	cbreak();
 	noecho();
-	
-	use_default_colors();
-
 	nodelay(stdscr, false);
 	bool pause = false;
-	
 	
 	//set a game in the terminal screen
 	AntGame game(stdscr);
