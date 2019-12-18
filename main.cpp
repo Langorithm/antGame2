@@ -8,13 +8,15 @@ int main(){
 	cbreak();
 	noecho();
 	nodelay(stdscr, false);
-	bool pause = false;
-	
+	use_default_colors();	
+
+
 	//set a game in the terminal screen
 	AntGame game(stdscr);
-
+	
 	//Game loop. Stop with q
 	char input = ' ';
+	bool pause = false;
 	while (input != 'q'){
 
 		if (input == 'p'){
