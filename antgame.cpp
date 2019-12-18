@@ -20,7 +20,8 @@ AntGame::AntGame(WINDOW* win){
 	_ant.color = red;
 	//Set colors//	
 	start_color();
-	init_pair(1, red, black);
+	Color bg = Color(-1);
+	init_pair(red, red, bg);
 
 }
 

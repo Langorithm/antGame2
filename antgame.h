@@ -1,10 +1,23 @@
 #include <vector>
 #include <ncurses.h>
 
+
 typedef std::vector< std::vector <bool> > boolMatrix;
+typedef int Color;
+
+#define bg 	-1;
+#define black 	 0;
+#define red 	 1;
+#define green 	 2;
+#define yellow 	 3;
+#define blue 	 4;
+#define magenta  5;
+#define cyan 	 6;
+#define white 	 7;
 
 enum Dir {up = 0, right = 1, down = 2, left = 3};
-enum Color {black = 0, red = 1, green = 2, yellow = 3, blue = 4, magenta = 5, cyan = 6, white = 7};
+//enum Color {black = 0, red = 1, green = 2, yellow = 3, blue = 4, magenta = 5, cyan = 6, white = 7, bg = -1};
+
 
 struct Ant {
 	int xPos;
