@@ -9,7 +9,7 @@ int main(){
 	noecho();
 	nodelay(stdscr, false);
 	use_default_colors();	
-
+	curs_set(0);
 
 	//set a game in the terminal screen
 	AntGame game(stdscr, 5);
