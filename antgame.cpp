@@ -2,7 +2,9 @@
 
 /*		Public		*/
 
-AntGame::AntGame(WINDOW* win){
+AntGame::AntGame(WINDOW* win, int antNumber){
+	antNumber = antNumber > 8 ? 8 : antNumber; //max 8 ants
+	
 	//Create map//
 	
 	int rows;
@@ -14,10 +16,16 @@ AntGame::AntGame(WINDOW* win){
 	_map = boolMatrix(rows, falseRow);
 	
 	//Set ant//
-	_ant.facing = up;
-	_ant.xPos = cols/2;
-	_ant.yPos = rows/2;	
-	_ant.color = red;
+
+	for (int i = 0; i < 8; i++){
+		Ant aux;
+		aux.facing = up;
+		aux.xPos = cols/(i+2);
+		aux.yPos = rows/(i+2);
+		aux.color = Color(i+1);
+	
+		_ants.push_back(aux);
+	}
 	//Set colors//	
 	start_color();
 	Color bg = Color(-1);
@@ -26,7 +34,10 @@ AntGame::AntGame(WINDOW* win){
 }
 
 void AntGame::tick(){
-	_advanceAnt(_ant);
+	
+	for (Ant &ant : _ants){
+		_advanceAnt(_ants[0]);
+	}
 	wrefresh(_win);
 	
 }
@@ -75,7 +86,7 @@ void AntGame::_advanceAnt(Ant& ant){
 	//Change direction
 	if ( _antTile(ant)){
 		
-		mvwaddch(_win, _ant.yPos, _ant.xPos, ' ');
+		mvwaddch(_win, ant.yPos, ant.xPos, ' ');
 		ant.turnLeft();
 	} else {
 		_printAnt(ant);
@@ -93,7 +104,7 @@ void AntGame::_advanceAnt(Ant& ant){
 
 void AntGame::_printAnt(Ant ant){
 	attron(COLOR_PAIR(ant.color));	
-	mvwaddch(_win, _ant.yPos, _ant.xPos, 'x');
+	mvwaddch(_win, ant.yPos, ant.xPos, 'x');
 	attroff(COLOR_PAIR(ant.color));	
 
 }

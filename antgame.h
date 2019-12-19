@@ -39,7 +39,7 @@ class AntGame {
 	
 public:
 	/*		   Constructors			*/
-	AntGame(WINDOW* win);
+	AntGame(WINDOW* win, int antNumber);
 
 	/*		    Functions			*/
 	void tick();
@@ -53,7 +53,7 @@ private:
 
 	boolMatrix _map;
 
-	Ant _ant;
+	std::vector<Ant> _ants;
 	
 	WINDOW* _win;
 	/*		    Functions			*/

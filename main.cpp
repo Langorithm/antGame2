@@ -12,7 +12,7 @@ int main(){
 
 
 	//set a game in the terminal screen
-	AntGame game(stdscr);
+	AntGame game(stdscr, 2);
 	
 	//Game loop. Stop with q
 	char input = ' ';
