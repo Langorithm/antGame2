@@ -15,28 +15,31 @@ AntGame::AntGame(WINDOW* win, int antNumber){
 	std::vector<bool> falseRow(cols, false);
 	_map = boolMatrix(rows, falseRow);
 	
+	start_color(); 	//needed to use colors in ncurses
+	Color bg = Color(-1);
+	
 	//Set ant//
 
-	for (int i = 0; i < 8; i++){
+	for (int i = 0; i < antNumber; i++){
 		Ant aux;
-		aux.facing = up;
+		aux.facing = Dir(i);
 		aux.xPos = cols/(i+2);
 		aux.yPos = rows/(i+2);
 		aux.color = Color(i+1);
 	
 		_ants.push_back(aux);
-	}
-	//Set colors//	
-	start_color();
-	Color bg = Color(-1);
-	init_pair(red, red, bg);
 
+		init_pair(i+1, i+1, bg);
+}
+	//Set colors//	
+	
+	
 }
 
 void AntGame::tick(){
 	
 	for (Ant &ant : _ants){
-		_advanceAnt(_ants[0]);
+		_advanceAnt(ant);
 	}
 	wrefresh(_win);
 	
