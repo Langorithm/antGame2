@@ -3,7 +3,8 @@
 
 
 typedef std::vector< std::vector <bool> > boolMatrix;
-typedef int Color;
+/*typedef int Color;
+
 
 #define bg 	-1;
 #define black 	 0;
@@ -14,9 +15,9 @@ typedef int Color;
 #define magenta  5;
 #define cyan 	 6;
 #define white 	 7;
-
+*/
 enum Dir {up = 0, right = 1, down = 2, left = 3};
-//enum Color {black = 0, red = 1, green = 2, yellow = 3, blue = 4, magenta = 5, cyan = 6, white = 7, bg = -1};
+enum Color {black = 0, red = 1, green = 2, yellow = 3, blue = 4, magenta = 5, cyan = 6, white = 7, bg = -1};
 
 
 struct Ant {
@@ -57,10 +58,10 @@ private:
 	WINDOW* _win;
 	/*		    Functions			*/
 
-	bool _antTile();
+	bool _antTile(Ant ant);
 	
-	void _forwardAnt();	//move ant in the direction it is facing
-	void _advanceAnt();     //change tile,turn and forward the ant
+	void _forwardAnt(Ant& ant);	//move ant in the direction it is facing
+	void _advanceAnt(Ant& ant);     //change tile,turn and forward the ant
 	void _printAnt(Ant ant);
 
 };
